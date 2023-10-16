@@ -1,5 +1,6 @@
+import { NavigationContainer } from "@react-navigation/native";
 import { useWalletConnectModal } from "@walletconnect/modal-react-native";
-import { WalletConnectModal } from '@walletconnect/modal-react-native'
+import { WalletConnectModal } from "@walletconnect/modal-react-native";
 import { StatusBar } from "expo-status-bar";
 import {
   Button,
@@ -11,19 +12,7 @@ import {
   Touchable,
   View,
 } from "react-native";
-
-type Props = {
-  providerMetadata: {
-    name: string;
-    description: string;
-    url: string;
-    icons: string[];
-    redirect: {
-      native: string;
-      universal?: string;
-    };
-  };
-};
+import Navigation from "./navigation";
 
 const projectId = "d4c2601ac4bccb8fd44de4a451018ff2";
 
@@ -38,53 +27,18 @@ const providerMetadata = {
   },
 };
 
+
 export default function App() {
-  const { open, isConnected,address } = useWalletConnectModal();
-  console.log(address);
-  
+  // const { open, isConnected, address } = useWalletConnectModal();
+  // console.log(address);
   return (
     <>
-    <SafeAreaView
-      style={{
-        backgroundColor: "white",
-        zIndex: 3,
-        width: "100%",
-        height: "100%",
-      }}
-    >
-      <View
-        style={{
-          justifyContent: "center",
-          alignItems: "center",
-          flex: 0.8,
-          backgroundColor: "white",
-        }}
-      >
-        <Image
-          source={require("./assets/favicon.png")}
-          width={100}
-          height={100}
-        />
-      </View>
-      <View
-        style={{
-          justifyContent: "center",
-          alignItems: "center",
-          flex: 0.2,
-          backgroundColor: "white",
-        }}
-      >
-        <Pressable onPress={open}>
-          <Text>{isConnected ? "View Account" : "Connect"}</Text>
-        </Pressable>
-        
-      </View>
-    </SafeAreaView>
-    <WalletConnectModal
-    projectId={projectId}
-    providerMetadata={providerMetadata}
-  />
-  </>
+      <Navigation/>
+      <WalletConnectModal
+        projectId={projectId}
+        providerMetadata={providerMetadata}
+      />
+    </>
   );
 }
 
