@@ -7,7 +7,7 @@ import {
   Pressable,
   Dimensions,
 } from "react-native";
-import React from "react";
+import React, { useEffect } from "react";
 import { RootStackScreenProps } from "../../types/navigation/types";
 import { useNavigation } from "@react-navigation/native";
 import { useWalletConnectModal } from "@walletconnect/modal-react-native";
@@ -19,18 +19,11 @@ const Login = ({}: RootStackScreenProps<"Login">) => {
   const [isLoading, setisLoading] = React.useState<boolean>(false);
   const width = Dimensions.get("window").width;
   const { open, isConnected, address, isOpen, close } = useWalletConnectModal();
-  async function HandleDefaultProfile(address:Scalars["EthereumAddress"]){
-    navigation.navigate("Root");
-  }
-  const handleConnectWallet = async () => {
-    if (isConnected && address) {
-        if(isOpen){
-            close();
-        }
-        setisLoading(true);
-        await HandleDefaultProfile(address);
+  useEffect(() => {
+    if (isConnected) {
+      navigation.navigate("Root");
     }
-  };
+  }, [isConnected]);
   return (
     <SafeAreaView
       style={{
@@ -54,7 +47,8 @@ const Login = ({}: RootStackScreenProps<"Login">) => {
           height={100}
         />
       </View>
-      <View
+      <Pressable
+      onPress={()=>open()}
         style={{
           justifyContent: "center",
           alignItems: "center",
@@ -62,10 +56,8 @@ const Login = ({}: RootStackScreenProps<"Login">) => {
           backgroundColor: "white",
         }}
       >
-        <Pressable onPress={open}>
           <Text>{isConnected ? "View Account" : "Connect"}</Text>
-        </Pressable>
-      </View>
+      </Pressable>
     </SafeAreaView>
   );
 };
