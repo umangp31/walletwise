@@ -2,6 +2,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { useWalletConnectModal } from "@walletconnect/modal-react-native";
 import { WalletConnectModal } from "@walletconnect/modal-react-native";
 import { StatusBar } from "expo-status-bar";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 import {
   Button,
   Image,
@@ -27,18 +28,18 @@ const providerMetadata = {
   },
 };
 
-
 export default function App() {
   // const { open, isConnected, address } = useWalletConnectModal();
   // console.log(address);
   return (
-    <>
-      <Navigation/>
+    <SafeAreaProvider>
+      <StatusBar style="auto" />
+      <Navigation />
       <WalletConnectModal
         projectId={projectId}
         providerMetadata={providerMetadata}
       />
-    </>
+    </SafeAreaProvider>
   );
 }
 

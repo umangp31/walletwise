@@ -18,6 +18,8 @@ export type RootStackParamList = {
     EditProfile: undefined;
     Search: undefined;
     NewGroup:undefined;
+    Profile:undefined;
+    AddProfile:undefined;
 }
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> = NativeStackScreenProps<
