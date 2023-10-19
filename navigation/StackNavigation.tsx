@@ -6,6 +6,7 @@ import BottomTabNavigator from "./BottomTabNavigator";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import Profile from "../screens/Profile";
 import AddProfile from "../screens/AddProfile";
+import CreateProfile from "../screens/Auth/CreateProfile";
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 type Props = {};
@@ -48,6 +49,15 @@ export default function StackNavigation({}: Props) {
       <Stack.Screen
         name="AddProfile"
         component={AddProfile}
+        options={{
+          headerShown: false,
+          animation: "default",
+          gestureEnabled: false,
+        }}
+      />
+      <Stack.Screen
+        name="CreateProfile"
+        component={CreateProfile}
         options={{
           headerShown: false,
           animation: "default",

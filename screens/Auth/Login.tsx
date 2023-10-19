@@ -36,23 +36,10 @@ const Login = ({}: RootStackScreenProps<"Login">) => {
       style={{
         backgroundColor: "white",
         zIndex: 3,
-        width: width,
-        height: height,
         paddingTop:top,
         flex:1
       }}
     >
-      <LinearGradient
-        colors={["transparent", black[100]]}
-        style={{
-          position: "absolute",
-          top: 0,
-          height: height,
-          width: width,
-          zIndex: 1,
-          flex:1
-        }}
-      />
       <Image
         source={require("../../assets/login.png")}
         style={{
@@ -81,7 +68,7 @@ const Login = ({}: RootStackScreenProps<"Login">) => {
             style={{
               fontSize: 48,
               fontWeight: "800",
-              color: black[400],
+              color: "#242424",
             }}
           >
             Division made
@@ -90,7 +77,7 @@ const Login = ({}: RootStackScreenProps<"Login">) => {
             style={{
               fontSize: 48,
               fontWeight: "700",
-              color: white[700],
+              color: "#ddf2df",
             }}
           >
             easy
@@ -101,7 +88,9 @@ const Login = ({}: RootStackScreenProps<"Login">) => {
           style={{
             width: "100%",
             marginVertical: 8,
+            backgroundColor:"#242424",
           }}
+          textStyle={{color:"white"}}
           isLoading={isLoading}
         >
           Connect wallet
