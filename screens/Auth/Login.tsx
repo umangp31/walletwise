@@ -77,7 +77,7 @@ const Login = ({}: RootStackScreenProps<"Login">) => {
             style={{
               fontSize: 48,
               fontWeight: "700",
-              color: "#ddf2df",
+              color: black[300],
             }}
           >
             easy

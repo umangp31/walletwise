@@ -11,9 +11,11 @@ import Group from "../icons/Group";
 import Activity from "../screens/BottomTabs/Activity";
 import Account from "../screens/BottomTabs/Account";
 import FriendsIcon from "../icons/Friends";
-import ActivityIcon from "../icons/Activity";
+import ActivityIcon from "../icons/ActivityIcon";
 import GroupIcon from "../icons/Group";
 import Groups from "../screens/BottomTabs/Groups";
+import Avatar from "../component/UI/Avatar";
+import useEditProfileStore from "../store/editProfileStore";
 
 const BottomTab = createBottomTabNavigator<RootTabParamList>();
 
@@ -22,14 +24,15 @@ export default function BottomTabNavigator({
 }: RootStackScreenProps<"Root">) {
   const windowHeight = Dimensions.get("window").height;
   let PROFILE_PIC_URI = "";
-
+  const {imageUrl,setImageUrl } =
+    useEditProfileStore();
   return (
     <>
       <BottomTab.Navigator
         initialRouteName="Groups"
         screenOptions={{
           tabBarHideOnKeyboard: true,
-          headerStyle: { backgroundColor: "black", elevation: 2 },
+          headerStyle: { backgroundColor: white[800], elevation: 2 },
           headerTitle: "",
           headerLeft: () => (
             <View
@@ -40,14 +43,14 @@ export default function BottomTabNavigator({
               }}
             >
               <Heading
-                style={{ fontSize: 24, fontWeight: "600", color: "white" }}
+                style={{ fontSize: 24, fontWeight: "600", color: black[100] }}
               >
                 WalletWise
               </Heading>
             </View>
           ),
           tabBarStyle: {
-            backgroundColor: black[800],
+            backgroundColor: white[800],
             alignItems: "center",
             justifyContent: "space-between",
             borderTopColor: "transparent",
@@ -71,11 +74,12 @@ export default function BottomTabNavigator({
                     width: 45,
                     alignContent: "center",
                     justifyContent: "center",
-                    flexDirection: "row",
+                    flexDirection: "column",
                     height: "100%",
                   }}
                 >
-                  <GroupIcon height={24} width={24} color={white[500]} />
+                  <GroupIcon style={{alignSelf:"center"}} height={24} width={24} color={white[500]} />
+                  <Heading style={{fontSize:12,alignSelf:"center"}} >Groups</Heading>
                 </View>
               );
             },
@@ -94,11 +98,12 @@ export default function BottomTabNavigator({
                     width: 45,
                     alignContent: "center",
                     justifyContent: "center",
-                    flexDirection: "row",
+                    flexDirection: "column",
                     height: "100%",
                   }}
                 >
-                  <FriendsIcon height={24} width={24} color={white[500]} />
+                  <FriendsIcon style={{alignSelf:"center"}} height={24} width={24} color={white[500]} />
+                  <Heading style={{fontSize:12,alignSelf:"center"}} >Friends</Heading>
                 </View>
               );
             },
@@ -117,11 +122,13 @@ export default function BottomTabNavigator({
                     width: 45,
                     alignContent: "center",
                     justifyContent: "center",
-                    flexDirection: "row",
+                    flexDirection: "column",
                     height: "100%",
                   }}
                 >
-                  <ActivityIcon height={24} width={24} color={white[500]} />
+                  <ActivityIcon style={{alignSelf:"center"}} height={24} width={24} color={white[500]} />
+                  <Heading style={{fontSize:12,alignSelf:"center"}} >Activity</Heading>
+                  
                 </View>
               );
             },
@@ -142,10 +149,14 @@ export default function BottomTabNavigator({
                     width: 45,
                     alignContent: "center",
                     justifyContent: "center",
-                    flexDirection: "row",
+                    flexDirection: "column",
                     height: "100%",
                   }}
-                ></View>
+                >
+                  {/* <ActivityIcon style={{alignSelf:"center"}} height={24} width={24} color={white[500]} /> */}
+                  <Avatar src={imageUrl} height={24} width={24} />
+                  <Heading style={{fontSize:12,alignSelf:"center"}} >Account</Heading>
+                </View>
               );
             },
           }}

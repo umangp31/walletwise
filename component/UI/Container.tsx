@@ -9,7 +9,7 @@ function Container({ children }: { children: React.ReactNode }) {
     <SafeAreaView
       style={{
         flex: 1,
-        backgroundColor: black[700],
+        backgroundColor: "white",
         paddingTop: top,
       }}
     >

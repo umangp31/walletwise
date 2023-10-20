@@ -1,8 +1,6 @@
-// import { Image } from "expo-image";
 import React from "react";
-import getIPFSLink from "../../utils/getIPFSlink";
 import { Image } from "react-native";
-// import getIPFSLink from "utils/getIPFSLink";
+import getIPFSLink from "../../utils/getIPFSLink";
 
 type AvatarProps = {
   src: string;
@@ -35,21 +33,19 @@ const Avatar: React.FC<AvatarProps> = ({
 
   return (
     <Image
-    //   placeholderContentFit="cover"
-    //   transition={500}
-    //   priority="high"
       source={{
         uri: resolvedSrc,
       }}
       style={{
-        // opacity,
-        // height,
-        // width,
-        // borderRadius,
-        backgroundColor: "white",
+        backgroundColor: "black",
+        alignSelf:"center",
         borderColor,
         borderWidth,
         zIndex: 9,
+        height,
+        width,
+        borderRadius:100,
+        opacity:0.7,
       }}
     />
   );
