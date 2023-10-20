@@ -1,18 +1,39 @@
 import { StyleSheet, Text, View } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import Lens from "../../icons/Lens";
 import { Heading } from "./Heading";
 import ENS from "../../icons/ENS";
 import Farcaster from "../../icons/Farcaster";
+import { useWalletConnectModal } from "@walletconnect/modal-react-native";
+import getAllIdsFromAddress, { APIResponse } from "../../utils/getAllIdsFromAddress";
 
 type Props = {};
 
 const ProfileCard = (props: Props) => {
+
+  const [data, setData] = useState<APIResponse[]>([])
+  const { address } = useWalletConnectModal();
+
+  React.useEffect(() => {
+
+    fetchUserProfiles()
+
+  }, [])
+
+  const fetchUserProfiles = async () => {
+    try {
+      const res = await getAllIdsFromAddress(address || "0xa423A05Eb84EAB65E9137dEabfBD127dc253C052")
+      console.log(res)
+      setData(res as unknown as APIResponse[])
+    } catch (error) {
+      console.log(error)
+    }
+  }
   const cardInfo = [
     {
       cardBgColors: "#ecf8ed",
       cardBorderColors: "#ddf2df",
-      cardContent: "devumang.lens",
+      cardContent: "lens",
       cardIcon: <Lens width={56} height={56} />,
     },
     {
@@ -30,8 +51,8 @@ const ProfileCard = (props: Props) => {
   ];
 
   return (
-    <View style={{flexWrap:"wrap",flexDirection:"row",gap:16,padding:16,justifyContent:"center",}} >
-      {cardInfo.map((item) => (
+    <View style={{ flexWrap: "wrap", flexDirection: "row", gap: 16, padding: 16, justifyContent: "center", }} >
+      {data && data.map((item, index) => (
         <>
           <View
             style={{
@@ -39,14 +60,14 @@ const ProfileCard = (props: Props) => {
               width: 150,
               borderRadius: 20,
               borderWidth: 2,
-              borderColor: item.cardBorderColors,
-              backgroundColor: item.cardBgColors,
+              borderColor: getSocialCard(item.platform??"")?.borderColor,
+              backgroundColor: getSocialCard(item.platform??"")?.bgColor,
               justifyContent: "center",
               alignItems: "center",
             }}
           >
-            <View>{item.cardIcon}</View>
-            <Heading>{item.cardContent}</Heading>
+            <View>{getSocialCard(item.platform??"")?.icon}</View>
+            <Heading>{item.identity}</Heading>
           </View>
         </>
       ))}
@@ -55,6 +76,29 @@ const ProfileCard = (props: Props) => {
 };
 
 export default ProfileCard;
+
+function getSocialCard(platformName: string) {
+  switch (platformName) {
+
+    case "lens":
+      return {
+        bgColor: "#ecf8ed",
+        borderColor:"#ddf2df",
+        icon: <Lens width={56} height={56} />
+      }
+    case "farcaster":
+      return { bgColor: "#efeaf8", 
+      borderColor:"#e2dbf3",
+      icon: <Farcaster width={56} height={56} /> }
+    case "ENS":
+      return {
+        bgColor: "#ebf3ff",
+        borderColor:"#d7e7ff",
+        icon: <ENS width={56} height={56} />
+      }
+
+  }
+}
 
 const styles = StyleSheet.create({
   cardContainer: {
