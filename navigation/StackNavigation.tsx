@@ -7,6 +7,7 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 import Profile from "../screens/Profile";
 import AddProfile from "../screens/AddProfile";
 import CreateProfile from "../screens/Auth/CreateProfile";
+import GroupPage from "../screens/GroupPage";
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 type Props = {};
@@ -62,6 +63,22 @@ export default function StackNavigation({}: Props) {
           headerShown: false,
           animation: "default",
           gestureEnabled: false,
+        }}
+      />
+      <Stack.Screen
+        name="GroupPage"
+        component={GroupPage}
+        options={{
+          headerShown: false,
+          animation: "default",
+          gestureEnabled: false,
+          // headerStyle: {
+          //   backgroundColor: 'white',
+          // },
+          // headerTitleStyle: {
+          //   color: 'black',
+          // },
+      
         }}
       />
     </Stack.Navigator>
