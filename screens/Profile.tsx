@@ -5,11 +5,13 @@ import { Heading } from "../component/UI/Heading";
 import Button from "../component/UI/Button";
 import { useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import useCreateProfile from "./hooks/useCreateProfile";
 
 type Props = {};
 
 const Profile = (props: Props) => {
   const navigation = useNavigation();
+  const {createProfile,data,error,}=useCreateProfile();
   return (
     <SafeAreaView
       style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
@@ -20,7 +22,9 @@ const Profile = (props: Props) => {
       <Button
         style={{ backgroundColor: "#242424" }}
         textStyle={{ color: "white" }}
-        onPress={() => navigation.navigate("CreateProfile")}
+        onPress={() => {
+          navigation.navigate("Root")
+        }}
       >
         Create Profile
       </Button>

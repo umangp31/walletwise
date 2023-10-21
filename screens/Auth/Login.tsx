@@ -1,21 +1,17 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  SafeAreaView,
-  Image,
-  Pressable,
-  Dimensions,
-} from "react-native";
-import React, { useEffect } from "react";
-import { RootStackScreenProps } from "../../types/navigation/types";
 import { useNavigation } from "@react-navigation/native";
 import { useWalletConnectModal } from "@walletconnect/modal-react-native";
-import { Heading } from "../../component/UI/Heading";
-import { black, white } from "../../constant/colors";
-import { LinearGradient } from "expo-linear-gradient";
+import React, { useEffect } from "react";
+import {
+  Dimensions,
+  Image,
+  SafeAreaView,
+  View
+} from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import Button from "../../component/UI/Button";
+import { Heading } from "../../component/UI/Heading";
+import { black } from "../../constant/colors";
+import { RootStackScreenProps } from "../../types/navigation/types";
 type Props = {};
 
 const Login = ({}: RootStackScreenProps<"Login">) => {
@@ -84,7 +80,9 @@ const Login = ({}: RootStackScreenProps<"Login">) => {
           </Heading>
         </View>
         <Button
-          onPress={open}
+          onPress={()=>{
+            navigation.navigate("Profile")
+          }}
           style={{
             width: "100%",
             marginVertical: 8,
@@ -101,5 +99,3 @@ const Login = ({}: RootStackScreenProps<"Login">) => {
 };
 
 export default Login;
-
-const styles = StyleSheet.create({});
