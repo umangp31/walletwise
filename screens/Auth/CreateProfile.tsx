@@ -1,5 +1,10 @@
 import React from "react";
-import { TextInput, TouchableOpacity, View } from "react-native";
+import {
+  ActivityIndicator,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import Container from "../../component/UI/Container";
 import Avatar from "../../component/UI/Avatar";
 import { Heading } from "../../component/UI/Heading";
@@ -8,6 +13,10 @@ import Button from "../../component/UI/Button";
 import useEditProfileStore from "../../store/editProfileStore";
 import { useNavigation } from "@react-navigation/native";
 import * as ImagePicker from "expo-image-picker";
+import useCreateProfile from "../hooks/useCreateProfile";
+import { useWalletConnectModal } from "@walletconnect/modal-react-native";
+import getIPFSLink from "../../utils/getIPFSLink";
+import uploadImageToIPFS from "../../utils/uploadToIPFS";
 export default function CreateProfile() {
   const {
     handle,
@@ -21,19 +30,9 @@ export default function CreateProfile() {
   } = useEditProfileStore();
   const navigation = useNavigation();
   const [status, requestPermission] = ImagePicker.useMediaLibraryPermissions();
+  const { address } = useWalletConnectModal();
 
-  //   React.useEffect(() => {
-  //     const avatar = getIPFSLink(getRawurl(currentProfile?.picture));
-  //     if (currentProfile?.name) {
-  //       setName(currentProfile?.name);
-  //     }
-  //     if (currentProfile?.bio) {
-  //       setDescription(currentProfile?.bio);
-  //     }
-  //     if (avatar) {
-  //       setImageUrl(avatar);
-  //     }
-  //   }, []);
+  const { isLoading, error, createProfile } = useCreateProfile();
 
   async function pickImage() {
     if (!status?.granted) {
@@ -52,7 +51,25 @@ export default function CreateProfile() {
   }
 
   async function handleSubmit() {
-    navigation.navigate("Root");
+    try {
+      const imgResponse = await fetch(imageUrl);
+      const blob = await imgResponse.blob();
+      let IPFSUri;
+      if (imageUrl) {
+        IPFSUri = await uploadImageToIPFS(blob);
+      }
+      await createProfile({
+        address: address!,
+        description: description,
+        name: name,
+        platform: "walletwise",
+        username: handle,
+        avatarUrl: IPFSUri!,
+      });
+      navigation.navigate("Root");
+    } catch (error) {
+      console.log("error in creating profile", error);
+    }
   }
 
   return (
@@ -187,7 +204,7 @@ export default function CreateProfile() {
           }}
           textStyle={{ color: "white" }}
         >
-          Submit
+          {isLoading ? <ActivityIndicator /> : "Submit"}
         </Button>
       </View>
     </Container>

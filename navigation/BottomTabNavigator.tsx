@@ -21,6 +21,7 @@ import { Colors } from "react-native/Libraries/NewAppScreen";
 import FriendsFilled from "../icons/FriendsFilled";
 import FilledGroup from "../icons/FilledGroup";
 import FilledActivity from "../icons/FilledActivity";
+import getIPFSLink from "../utils/getIPFSLink";
 
 const BottomTab = createBottomTabNavigator<RootTabParamList>();
 
@@ -29,7 +30,7 @@ export default function BottomTabNavigator({
 }: RootStackScreenProps<"Root">) {
   const windowHeight = Dimensions.get("window").height;
   let PROFILE_PIC_URI = "";
-  const { imageUrl, setImageUrl } = useEditProfileStore();
+  const { imageUrl, setImageUrl, user } = useEditProfileStore();
   // const [activeTab, setactiveTab] = React.useState<string>(name )
   return (
     <>
@@ -247,7 +248,7 @@ export default function BottomTabNavigator({
                   {focused ? (
                     <>
                       <Avatar
-                        src={imageUrl}
+                        src={imageUrl || getIPFSLink(`ipfs://${user?.avatar}`)}
                         height={24}
                         width={24}
                         borderWidth={1}
@@ -265,7 +266,11 @@ export default function BottomTabNavigator({
                     </>
                   ) : (
                     <>
-                      <Avatar src={imageUrl} height={24} width={24} />
+                      <Avatar
+                        src={imageUrl || getIPFSLink(`ipfs://${user?.avatar}`)}
+                        height={24}
+                        width={24}
+                      />
                       <Heading style={{ fontSize: 12, alignSelf: "center" }}>
                         Account
                       </Heading>

@@ -1,17 +1,14 @@
 import { useNavigation } from "@react-navigation/native";
 import { useWalletConnectModal } from "@walletconnect/modal-react-native";
 import React, { useEffect } from "react";
-import {
-  Dimensions,
-  Image,
-  SafeAreaView,
-  View
-} from "react-native";
+import { Dimensions, Image, SafeAreaView, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import Button from "../../component/UI/Button";
 import { Heading } from "../../component/UI/Heading";
 import { black } from "../../constant/colors";
 import { RootStackScreenProps } from "../../types/navigation/types";
+import useProfile from "../hooks/useProfile";
+import useEditProfileStore from "../../store/editProfileStore";
 type Props = {};
 
 const Login = ({}: RootStackScreenProps<"Login">) => {
@@ -22,18 +19,34 @@ const Login = ({}: RootStackScreenProps<"Login">) => {
   const height = Dimensions.get("window").height;
 
   const { open, isConnected, address, isOpen, close } = useWalletConnectModal();
+  const { setUser } = useEditProfileStore();
+  const {
+    data: profileData,
+    error: profileError,
+    isLoading: profileLoading,
+    fetchProfile,
+  } = useProfile(address!);
+
   useEffect(() => {
-    if (isConnected) {
+    handleNavigation();
+  }, [isConnected, profileLoading]);
+
+  const handleNavigation = async () => {
+    const userProfile = await fetchProfile();
+    if (userProfile) {
+      setUser(userProfile);
+      navigation.navigate("Root");
+    } else if (isConnected) {
       navigation.navigate("Profile");
     }
-  }, [isConnected]);
+  };
   return (
     <SafeAreaView
       style={{
         backgroundColor: "white",
         zIndex: 3,
-        paddingTop:top,
-        flex:1
+        paddingTop: top,
+        flex: 1,
       }}
     >
       <Image
@@ -41,7 +54,7 @@ const Login = ({}: RootStackScreenProps<"Login">) => {
         style={{
           height: height / 2,
           width: width,
-          objectFit:"cover"
+          objectFit: "cover",
         }}
         // contentFit="cover"
       />
@@ -80,15 +93,13 @@ const Login = ({}: RootStackScreenProps<"Login">) => {
           </Heading>
         </View>
         <Button
-          onPress={()=>{
-            navigation.navigate("Profile")
-          }}
+          onPress={open}
           style={{
             width: "100%",
             marginVertical: 8,
-            backgroundColor:"#242424",
+            backgroundColor: "#242424",
           }}
-          textStyle={{color:"white"}}
+          textStyle={{ color: "white" }}
           isLoading={isLoading}
         >
           Connect wallet
