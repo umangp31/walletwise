@@ -7,12 +7,20 @@ import { black, white } from "../../constant/colors";
 import Button from "../../component/UI/Button";
 import useEditProfileStore from "../../store/editProfileStore";
 import { useNavigation } from "@react-navigation/native";
-import * as ImagePicker from "expo-image-picker"
+import * as ImagePicker from "expo-image-picker";
 export default function CreateProfile() {
-  const { handle,name, description, imageUrl,setHandle, setName, setDescription, setImageUrl } =
-    useEditProfileStore();
-    const navigation=useNavigation();
-    const [status, requestPermission] = ImagePicker.useMediaLibraryPermissions();
+  const {
+    handle,
+    name,
+    description,
+    imageUrl,
+    setHandle,
+    setName,
+    setDescription,
+    setImageUrl,
+  } = useEditProfileStore();
+  const navigation = useNavigation();
+  const [status, requestPermission] = ImagePicker.useMediaLibraryPermissions();
 
   //   React.useEffect(() => {
   //     const avatar = getIPFSLink(getRawurl(currentProfile?.picture));
@@ -27,21 +35,21 @@ export default function CreateProfile() {
   //     }
   //   }, []);
 
-    async function pickImage() {
-      if (!status?.granted) {
-        await requestPermission();
-      }
-      if (!status?.granted) return;
-      const image = await ImagePicker.launchImageLibraryAsync({
-        mediaTypes: ImagePicker.MediaTypeOptions.Images,
-        allowsEditing: true,
-        aspect: [1, 1],
-        quality: 1,
-      });
-      if (!image.canceled) {
-        setImageUrl(image?.assets[0]?.uri);
-      }
+  async function pickImage() {
+    if (!status?.granted) {
+      await requestPermission();
     }
+    if (!status?.granted) return;
+    const image = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      aspect: [1, 1],
+      quality: 1,
+    });
+    if (!image.canceled) {
+      setImageUrl(image?.assets[0]?.uri);
+    }
+  }
 
   async function handleSubmit() {
     navigation.navigate("Root");
@@ -64,9 +72,9 @@ export default function CreateProfile() {
           }}
         >
           <TouchableOpacity
-            activeOpacity={0.8}
+            activeOpacity={1}
             onPress={() => {
-                pickImage();
+              pickImage();
             }}
           >
             <Avatar src={imageUrl} height={180} width={180} />

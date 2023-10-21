@@ -20,6 +20,7 @@ export type RootStackParamList = {
     NewGroup:undefined;
     Profile:undefined;
     AddProfile:undefined;
+    GroupPage:undefined;
 }
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> = NativeStackScreenProps<
