@@ -33,6 +33,8 @@ const Login = ({}: RootStackScreenProps<"Login">) => {
 
   const handleNavigation = async () => {
     const userProfile = await fetchProfile();
+    console.log(userProfile,'ff');
+    
     if (userProfile) {
       setUser(userProfile);
       navigation.navigate("Root");

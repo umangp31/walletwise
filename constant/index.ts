@@ -6,24 +6,24 @@ const ARWEAVE_GATEWAY = "https://arweave.net";
 const IPFS_UPLOAD_API = "https://api.web3.storage/upload";
 
 const STATIC_ASSET =
-    "https://lens.infura-ipfs.io/ipfs/bafybeibv2kpqpjtvuj5uprvq6knnr2reb7ylq3o4bnypqjioqgxmjw2akq/5460475.webp";
+  "https://lens.infura-ipfs.io/ipfs/bafybeibv2kpqpjtvuj5uprvq6knnr2reb7ylq3o4bnypqjioqgxmjw2akq/5460475.webp";
 
 const MENTION_REGEX = /(@[^\s]+)/g;
 
-export const PROXY_API_URL="http://192.168.3.216:3000/api"
+export const PROXY_API_URL = "http://192.168.10.216:3000/api";
 
 const URL_REGEX =
-    /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/;
+  /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/;
 
-const LENSPLAY_SITE = "https://lensplay.xyz"
+const LENSPLAY_SITE = "https://lensplay.xyz";
 
 export {
-    IPFS_GATEWAY,
-    ADDRESS_REGEX,
-    ARWEAVE_GATEWAY,
-    STATIC_ASSET,
-    IPFS_UPLOAD_API,
-    MENTION_REGEX,
-    URL_REGEX,
-    LENSPLAY_SITE
+  IPFS_GATEWAY,
+  ADDRESS_REGEX,
+  ARWEAVE_GATEWAY,
+  STATIC_ASSET,
+  IPFS_UPLOAD_API,
+  MENTION_REGEX,
+  URL_REGEX,
+  LENSPLAY_SITE,
 };

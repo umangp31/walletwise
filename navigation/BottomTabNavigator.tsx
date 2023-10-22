@@ -56,17 +56,6 @@ export default function BottomTabNavigator({
               </Heading>
             </View>
           ),
-          headerRight:()=>(
-            <View
-            style={{
-              paddingHorizontal: 24,
-              flexDirection: "row",
-              alignItems: "center",
-            }}
-            >
-              <NewGroup height={24} width={24} />
-            </View>
-          ),
           tabBarStyle: {
             backgroundColor: white[800],
             alignItems: "center",
@@ -151,11 +140,11 @@ export default function BottomTabNavigator({
                 >
                   {focused ? (
                     <>
-                      <FriendsFilled
+                      <NewGroup
                         style={{ alignSelf: "center" }}
                         height={24}
                         width={24}
-                        color={white[500]}
+                        color={"#9d4edd"}
                       />
                       <Heading
                         style={{
@@ -164,19 +153,19 @@ export default function BottomTabNavigator({
                           color: "#9d4edd",
                         }}
                       >
-                        Friends
+                        Create
                       </Heading>
                     </>
                   ) : (
                     <>
-                      <FriendsIcon
+                      <NewGroup
                         style={{ alignSelf: "center" }}
                         height={24}
                         width={24}
                         color={white[500]}
                       />
                       <Heading style={{ fontSize: 12, alignSelf: "center" }}>
-                        Friends
+                        Create
                       </Heading>
                     </>
                   )}
