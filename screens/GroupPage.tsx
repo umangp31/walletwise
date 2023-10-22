@@ -51,13 +51,13 @@ const GroupPage = (props: Props) => {
           }}
         />
       </View> */}
-      <View style={{ paddingHorizontal: 24,paddingVertical:12}}>
-        <Text style={{ fontSize: 28, fontWeight: "700", color: black[200] }}>
+      <View style={{ paddingHorizontal: 12,paddingVertical:12}}>
+        <Text style={{ fontSize: 32, fontWeight: "700", color: black[200] }}>
           Eth BoomBam
         </Text>
         <Heading
           style={{
-            fontSize: 18,
+            fontSize: 16,
             fontWeight: "700",
             color: black[200],
             paddingVertical: 4,
@@ -67,7 +67,7 @@ const GroupPage = (props: Props) => {
         </Heading>
         <Heading
           style={{
-            fontSize: 18,
+            fontSize: 16,
             fontWeight: "700",
             color: black[200],
             paddingVertical: 4,
@@ -85,7 +85,7 @@ const GroupPage = (props: Props) => {
         >
           Total: $1200
         </Heading>
-        <ScrollView style={{ paddingVertical: 16 }}>
+        <View style={{ paddingVertical: 16 }}>
           <Heading
             style={{ color: black[200], fontWeight: "600", fontSize: 18 }}
           >
@@ -104,7 +104,7 @@ const GroupPage = (props: Props) => {
           <TransactionCard />
           <TransactionCard />
           <TransactionCard />
-        </ScrollView>
+        </View>
       </View>
     </View>
   );

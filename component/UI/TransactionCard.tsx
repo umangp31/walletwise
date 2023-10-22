@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { ScrollView, StyleSheet, Text, View } from "react-native";
 import React from "react";
 import Avatar from "./Avatar";
 import useEditProfileStore from "../../store/editProfileStore";
@@ -24,11 +24,11 @@ const TransactionCard = (props: Props) => {
         gap: 12,
       }}
     >
-      <View style={{paddingHorizontal:0,alignItems:"center"}} >
+      <View style={{alignItems:"center",paddingRight:8}} >
         <Heading style={{fontWeight:"700",fontSize:12,color:black[100]}} >15</Heading>
         <Heading style={{fontWeight:"700",fontSize:12,color:black[100]}} >Oct</Heading>
       </View>
-      <Money height={36} width={36} />
+      <Money height={24} width={24} />
       <View>
         <Heading>Vivek</Heading>
       </View>

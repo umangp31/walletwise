@@ -22,6 +22,7 @@ import FriendsFilled from "../icons/FriendsFilled";
 import FilledGroup from "../icons/FilledGroup";
 import FilledActivity from "../icons/FilledActivity";
 import getIPFSLink from "../utils/getIPFSLink";
+import NewGroup from "../icons/NewGroup";
 
 const BottomTab = createBottomTabNavigator<RootTabParamList>();
 
@@ -53,6 +54,17 @@ export default function BottomTabNavigator({
               >
                 WalletWise
               </Heading>
+            </View>
+          ),
+          headerRight:()=>(
+            <View
+            style={{
+              paddingHorizontal: 24,
+              flexDirection: "row",
+              alignItems: "center",
+            }}
+            >
+              <NewGroup height={24} width={24} />
             </View>
           ),
           tabBarStyle: {
